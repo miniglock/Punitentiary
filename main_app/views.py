@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .models import Joke, Comment, JokeFavorite, CommentFavorite
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -10,16 +11,41 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
+class JokeUpdate(UpdateView):
+    model = Joke
+    fields = ["body", "punchline", "tag"]
+
+
+def profile(request):
+    pass
+
+
 def home(request):
-    return render(request, "home.html")
+    jokes = Joke.objects.filter(tag="SFW")
+    return render(request, "home.html", {"jokes": jokes})
 
 
-def jokes_create(request):
+class JokeCreate(LoginRequiredMixin, CreateView):
+    model = Joke
+    fields = ["body", "punchline", "tag"]
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+def jokes_detail(request, joke_id):
+    joke = Joke.objects.get(id=joke_id)
+    return render(request, "jokes/detail.html", {"joke": joke})
+
+
+def profile(request):
     pass
 
 
 def nsfw_jokes(request):
-    pass
+    jokes = Joke.objects.filter(tag="NSFW")
+    return render(request, "home.html", {"jokes": jokes})
 
 
 def signup(request):
