@@ -12,6 +12,9 @@
                 <p>Punchline: {{ joke.punchline }}</p>
                 {% endif %}
             </div>
+            <div class="card-action">
+                <a href="{% url 'jokes_update' joke.id %}">Edit</a>
+            </div>
         </div>
     </div>
 </div>
