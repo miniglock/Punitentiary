@@ -8,6 +8,7 @@ urlpatterns = [
     path("jokes/<int:joke_id>/", views.jokes_detail, name="jokes_detail"),
     path("jokes/<int:pk>/update/", views.JokeUpdate.as_view(), name="jokes_update"),
     path("jokes/<int:pk>/delete/", views.JokeDelete.as_view(), name="jokes_delete"),
+    path("jokes/<int:joke_id>/add_comment", views.add_comment, name="add_comment"),
     path("accounts/profile/", views.profile, name="profile"),
     path("accounts/signup/", views.signup, name="signup"),
 ]
