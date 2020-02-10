@@ -34,6 +34,11 @@ class JokeCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class JokeDelete(LoginRequiredMixin, DeleteView):
+    model = Joke
+    success_url = "/"
+
+
 def jokes_detail(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     return render(request, "jokes/detail.html", {"joke": joke})
