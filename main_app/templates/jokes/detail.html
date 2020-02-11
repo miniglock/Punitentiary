@@ -7,9 +7,9 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">Told By: {{ user.username }}</span>
-                <p>Joke: {{ joke.body }}</p>
+                <p class="joke-body">Joke: {{ joke.body }}</p>
                 {% if joke.punchline %}
-                <p>Punchline: {{ joke.punchline }}</p>
+                <p class="punchline">Punchline: {{ joke.punchline }}</p>
                 {% endif %}
             </div>
             <div class="card-action">
@@ -33,16 +33,20 @@
                 <div class="card-content">
                     <h5>{{ comment.user.username }} <span class='comment_date'>{{ comment.date }} </span></h5><br />
                     <span id="comment-{{ comment.id }}">{{ comment.text }}</span>
-                    <form action="{% url 'comments_update' comment.id%}" method="post" id="comment-form-{{ comment.id }}" class="hidden">
+                    <form action="{% url 'comments_update' comment.id%}" method="post"
+                        id="comment-form-{{ comment.id }}" class="hidden">
                         {% csrf_token %}
-                        <input name="text" type="text" id="id_text_{{ comment.id}}" maxlength="200" value="{{ comment.text }}" required>
+                        <input name="text" type="text" id="id_text_{{ comment.id}}" maxlength="200"
+                            value="{{ comment.text }}" required>
                         <input type="submit" value="Submit" class="btn" />
-                        <input type="button" value="Cancel" class="btn comment-update-cancel-btn" data-form="comment-form-{{ comment.id }}" data-id="comment-{{ comment.id }}"/>
+                        <input type="button" value="Cancel" class="btn comment-update-cancel-btn"
+                            data-form="comment-form-{{ comment.id }}" data-id="comment-{{ comment.id }}" />
                     </form>
                 </div>
                 {% if user.is_authenticated and user.id == comment.user.id %}
                 <div class="card-action">
-                    <a class="comment-update-btn" data-id="comment-{{ comment.id }}" data-form="comment-form-{{ comment.id }}">Edit</a>
+                    <a class="comment-update-btn" data-id="comment-{{ comment.id }}"
+                        data-form="comment-form-{{ comment.id }}">Edit</a>
                     <a href="{% url 'comments_delete' comment.id %}">Delete</a>
                 </div>
                 {% endif %}
