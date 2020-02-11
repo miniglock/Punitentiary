@@ -49,6 +49,11 @@ class JokeDelete(LoginRequiredMixin, DeleteView):
 def jokes_detail(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     favorite_count = len(JokeFavorite.objects.filter(joke=joke_id))
+    try:
+        joke_fav = JokeFavorite.objects.get(user=request.user, joke=joke_id)
+    except JokeFavorite.DoesNotExist:
+        joke_fav = None
+
     comments = Comment.objects.filter(joke=joke_id)
     comment_form = CommentForm()
     return render(
@@ -59,6 +64,7 @@ def jokes_detail(request, joke_id):
             "comment_form": comment_form,
             "comments": comments,
             "favorite_count": favorite_count,
+            "joke_fav": joke_fav,
         },
     )
 
