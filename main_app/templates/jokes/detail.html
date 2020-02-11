@@ -33,11 +33,16 @@
                 <div class="card-content">
                     <h5>{{ comment.user.username }} <span class='comment_date'>{{ comment.date }} </span></h5><br />
                     <span id="comment-{{ comment.id }}">{{ comment.text }}</span>
+                    <form action="{% url 'comments_update' comment.id%}" method="post" id="comment-form-{{ comment.id }}" class="hidden">
+                        {% csrf_token %}
+                        <input name="text" type="text" id="id_text_{{ comment.id}}" maxlength="200" value="{{ comment.text }}" required>
+                        <input type="submit" value="Submit" class="btn" />
+                        <input type="button" value="Cancel" class="btn comment-update-cancel-btn" data-form="comment-form-{{ comment.id }}" data-id="comment-{{ comment.id }}"/>
+                    </form>
                 </div>
                 {% if user.is_authenticated and user.id == comment.user.id %}
                 <div class="card-action">
-                    <!-- <a href="{% url 'comments_update' comment.id %}">Edit</a> -->
-                    <button id="comment-update" data-id="comment-{{ comment.id }}">Edit</button>
+                    <a class="comment-update-btn" data-id="comment-{{ comment.id }}" data-form="comment-form-{{ comment.id }}">Edit</a>
                     <a href="{% url 'comments_delete' comment.id %}">Delete</a>
                 </div>
                 {% endif %}

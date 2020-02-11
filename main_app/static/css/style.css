@@ -2,3 +2,7 @@
   color: grey;
   font-size: small;
 }
+
+.hidden {
+  display: none;
+}
