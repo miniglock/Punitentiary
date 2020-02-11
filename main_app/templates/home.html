@@ -6,7 +6,8 @@
 <div class='card'>
     <a href="{% url 'jokes_detail' joke.id %}">
         <div class='card-content'>
-            <span class="card-title">{{ joke.body }}</span>
+            <span class="card-title">{{ joke.body }}<span class="right"> <i
+                        class="material-icons">favorite</i>{{ joke.fav_score }}</span></span>
         </div>
     </a>
 </div>

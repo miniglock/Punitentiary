@@ -29,6 +29,13 @@ def joke_favorites_add(request, joke_id):
 
 def home(request):
     jokes = Joke.objects.filter(tag="SFW")
+    # for joke in jokes:
+    #     joke["fav_count"] = len(JokeFavorite.objects.filter(joke=joke))
+    # fav_count = JokeFavorite.objects.filter(joke=joke_id)
+    # fav_count_dict = {}
+    # for joke in jokes:
+    #     fav_count_dict[joke.id] = len(JokeFavorite.objects.filter(joke=joke))
+
     return render(request, "home.html", {"jokes": jokes})
 
 
