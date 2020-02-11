@@ -86,6 +86,14 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 category = "main"
+description = "Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."
+name = "django-environ"
+optional = false
+python-versions = "*"
+version = "0.4.5"
+
+[[package]]
+category = "main"
 description = "This is a Django library for Heroku apps."
 name = "django-heroku"
 optional = false
@@ -183,7 +191,7 @@ version = "5.0.1"
 brotli = ["brotli"]
 
 [metadata]
-content-hash = "726213f2b15bcb15c69eaa36d2d6b97ef68597434f3a99be6d62d4f46c602bd3"
+content-hash = "7517354b901ca4b3c9ad864e57ad4a448f6689d3f326f00c09b1784205890531"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -214,6 +222,10 @@ dj-database-url = [
 django = [
     {file = "Django-3.0.3-py3-none-any.whl", hash = "sha256:c91c91a7ad6ef67a874a4f76f58ba534f9208412692a840e1d125eb5c279cb0a"},
     {file = "Django-3.0.3.tar.gz", hash = "sha256:2f1ba1db8648484dd5c238fb62504777b7ad090c81c5f1fd8d5eb5ec21b5f283"},
+]
+django-environ = [
+    {file = "django-environ-0.4.5.tar.gz", hash = "sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde"},
+    {file = "django_environ-0.4.5-py2.py3-none-any.whl", hash = "sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"},
 ]
 django-heroku = [
     {file = "django-heroku-0.3.1.tar.gz", hash = "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"},
