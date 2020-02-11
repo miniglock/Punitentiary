@@ -19,7 +19,7 @@
         </div>
         <div>
             {% if user.is_authenticated %}
-            <form action="{% url 'add_comment' joke.id%}" method="post">
+            <form action="{% url 'comments_add' joke.id%}" method="post">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
                 <input type="submit" class="btn" value="Add Comment">
@@ -31,17 +31,24 @@
             {% for comment in comments %}
             <div class="card">
                 <div class="card-content">
-                    {{ comment.text }}
+                    <h5>{{ comment.user.username }} <span class='comment_date'>{{ comment.date }} </span></h5><br />
+                    <span id="comment-{{ comment.id }}">{{ comment.text }}</span>
+                    <form action="{% url 'comments_update' comment.id%}" method="post" id="comment-form-{{ comment.id }}" class="hidden">
+                        {% csrf_token %}
+                        <input name="text" type="text" id="id_text_{{ comment.id}}" maxlength="200" value="{{ comment.text }}" required>
+                        <input type="submit" value="Submit" class="btn" />
+                        <input type="button" value="Cancel" class="btn comment-update-cancel-btn" data-form="comment-form-{{ comment.id }}" data-id="comment-{{ comment.id }}"/>
+                    </form>
                 </div>
+                {% if user.is_authenticated and user.id == comment.user.id %}
+                <div class="card-action">
+                    <a class="comment-update-btn" data-id="comment-{{ comment.id }}" data-form="comment-form-{{ comment.id }}">Edit</a>
+                    <a href="{% url 'comments_delete' comment.id %}">Delete</a>
+                </div>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
-    </div>
-    <div class="col s6">
-
-        <!-- <div class="card-panel">
-            
-        </div> -->
     </div>
 </div>
 {% endblock %}
