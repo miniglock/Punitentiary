@@ -21,5 +21,10 @@ urlpatterns = [
     ),
     path("accounts/profile/", views.profile, name="profile"),
     path("accounts/signup/", views.signup, name="signup"),
+    path(
+        "jokes/<int:joke_id>/favorite/",
+        views.joke_favorites_add,
+        name="joke_favorites_add",
+    ),
 ]
 

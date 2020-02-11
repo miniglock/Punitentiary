@@ -11,6 +11,10 @@
                 {% if joke.punchline %}
                 <p class="punchline">Punchline: {{ joke.punchline }}</p>
                 {% endif %}
+                <p>{{ favorite_count }}</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'joke_favorites_add' joke.id %}">Favorite</a>
+                {% endif %}
             </div>
             <div class="card-action">
                 <a href="{% url 'jokes_update' joke.id %}">Edit</a>
