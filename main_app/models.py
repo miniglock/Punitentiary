@@ -31,6 +31,13 @@ class JokeFavorite(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     date = models.DateField(auto_now_add=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["joke", "user"], name="unique_jokes_favorite"
+            )
+        ]
+
 
 class CommentFavorite(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
