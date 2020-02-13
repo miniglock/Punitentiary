@@ -15,8 +15,13 @@ class Joke(models.Model):
     tag = models.CharField(max_length=4, choices=TAGS, default=TAGS[0][0])
     date = models.DateField(auto_now_add=True)
 
+    def calculateFavorites(self):
+        return JokeFavorite.objects.filter(joke=self).count()
+
     def get_absolute_url(self):
         return reverse("jokes_detail", kwargs={"joke_id": self.id})
+
+    fav_score = property(calculateFavorites)
 
 
 class Comment(models.Model):

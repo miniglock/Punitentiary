@@ -29,6 +29,13 @@ def joke_favorites_add(request, joke_id):
 
 def home(request):
     jokes = Joke.objects.filter(tag="SFW")
+    # for joke in jokes:
+    #     joke["fav_count"] = len(JokeFavorite.objects.filter(joke=joke))
+    # fav_count = JokeFavorite.objects.filter(joke=joke_id)
+    # fav_count_dict = {}
+    # for joke in jokes:
+    #     fav_count_dict[joke.id] = len(JokeFavorite.objects.filter(joke=joke))
+
     return render(request, "home.html", {"jokes": jokes})
 
 
@@ -49,9 +56,12 @@ class JokeDelete(LoginRequiredMixin, DeleteView):
 def jokes_detail(request, joke_id):
     joke = Joke.objects.get(id=joke_id)
     favorite_count = len(JokeFavorite.objects.filter(joke=joke_id))
-    try:
-        joke_fav = JokeFavorite.objects.get(user=request.user, joke=joke_id)
-    except JokeFavorite.DoesNotExist:
+    if request.user.is_authenticated:
+        try:
+            joke_fav = JokeFavorite.objects.get(user=request.user, joke=joke_id)
+        except JokeFavorite.DoesNotExist:
+            joke_fav = None
+    else:
         joke_fav = None
 
     comments = Comment.objects.filter(joke=joke_id)

@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from .secret import *
+
+SECRET_KEY = "mer2vu=4x-%$1gdv4j#*+=ip&1ht-5=70%i0$e@4lao=zynfxe"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -110,6 +111,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
+
+import django_heroku
+
+django_heroku.settings(locals())
