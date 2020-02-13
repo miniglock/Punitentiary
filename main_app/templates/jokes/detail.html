@@ -7,11 +7,11 @@
         <div class="card">
             <div class="card-content">
                 {% if user.is_authenticated and not joke_fav %}
-                <span class="card-title">Told By: {{ user.username }} <span class="right"> <a
+                <span class="card-title">Told By: {{ joke.user.username }} <span class="right"> <a
                             href="{% url 'joke_favorites_add' joke.id %}"><i class="material-icons">favorite</i></a>
                         {{ favorite_count }}</span></span>
                 {% else %}
-                <span class="card-title">Told By: {{ user.username }} <span class="right"> <i
+                <span class="card-title">Told By: {{ joke.user.username }} <span class="right"> <i
                             class="material-icons">favorite</i>{{ favorite_count }}</span></span>
                 {% endif %}
                 <p class="joke-body">Joke: {{ joke.body }}</p>
