@@ -7,7 +7,7 @@ authors = ["miniglock <davidbrin45@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 psycopg2 = "^2.8.4"
-Django = "^3.0.3"
+Django = "^3.0.7"
 django-heroku = "^0.3.1"
 gunicorn = "^20.0.4"
 django-environ = "^0.4.5"
